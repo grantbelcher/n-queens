@@ -79,11 +79,25 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //console.log('grant', rowIndex)
+      let counter = 0
+      for (let c = 0 ; c < rowIndex.length; c++) {
+        if (rowIndex[c] === 1) {
+          counter++
+        }
+      }
+      return counter > 1; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      //iterate through, for each row within board. call if hasRowConflictAt(row) === true, return true
+      for (let row in this.attributes) {
+        //console.log('this.attributes',this.attributes[row])
+        if (this.hasRowConflictAt(this.attributes[row]) === true) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
@@ -99,6 +113,11 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      for (let col in this.attributes) {
+        if (this.hasColConflictAt(this.attributes[row]) === true) {
+
+        }
+      }
       return false; // fixme
     },
 
