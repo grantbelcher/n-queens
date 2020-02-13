@@ -79,9 +79,9 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      //console.log('grant', rowIndex)
+
       let counter = 0
-      for (let c = 0 ; c < rowIndex.length; c++) {
+      for (let c = 0 ; c < rowIndex.length -1; c++) {
         if (rowIndex[c] === 1) {
           counter++
         }
@@ -93,7 +93,7 @@
     hasAnyRowConflicts: function() {
       //iterate through, for each row within board. call if hasRowConflictAt(row) === true, return true
       for (let row in this.attributes) {
-        //console.log('this.attributes',this.attributes[row])
+
         if (this.hasRowConflictAt(this.attributes[row]) === true) {
           return true;
         }
@@ -107,15 +107,35 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
-    hasColConflictAt: function(colIndex) {
-      return false; // fixme
+    hasColConflictAt: function(rowIndex) {
+      // console.log('thisSumcol', hasAnyColConflicts.sumCol)
+      // let counter = 0
+      // for (let c = 0; c < rowIndex.length; c++) {
+      //   if (rowIndex[c] === 1) {
+      //     this.hasAnyColConflicts.sumCol[c]++
+      //   }
+      // }
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      for (let col in this.attributes) {
-        if (this.hasColConflictAt(this.attributes[row]) === true) {
+      let oldMatrix = this.rows()
+      let newMatrix = []
+      while (newMatrix.length < oldMatrix.length) {
+        newMatrix.push(new Array(oldMatrix.length))
+      }
 
+      for (let row = 0; row < newMatrix.length; row++) {
+        for (let col = 0; col < newMatrix.length; col++) {
+          newMatrix[col][row] = oldMatrix[row][col]
+        }
+      }
+
+      for (let row in newMatrix) {
+
+        if (this.hasRowConflictAt(newMatrix[row]) === true) {
+          return true;
         }
       }
       return false; // fixme
